@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:marham_softec/core/theme/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -17,14 +18,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Container(
         height: kToolbarHeight + 10, // Same as default AppBar height
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.backgroundLight,
           
         ),
         child: Row(
           children: [
             if (showBackButton)
               IconButton(
-                icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black87),
+                icon: Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.backgroundDark),
                 onPressed: () {
                   context.pop();
                 },
@@ -38,7 +39,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black87,
+                    color: AppColors.backgroundDark,
                   ),
                 ),
               ),
