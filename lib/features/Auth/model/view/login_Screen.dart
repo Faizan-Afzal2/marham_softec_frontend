@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:marham_softec/core/theme/app_colors.dart';
 import 'package:marham_softec/core/theme/app_fonts.dart';
 import 'package:marham_softec/core/widgets/app_textfeild.dart';
@@ -104,7 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 14),
                 BorderButton(
-                  onPressed: _login,
+                  onPressed: () {
+                    context.push('/signup');
+                  },
                   text: 'Create an account',
                 ),
                 SizedBox(height: 24),
