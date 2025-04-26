@@ -261,16 +261,31 @@ class _PlannerScreenState extends State<PlannerScreen> {
                   ),
                 ],
               ),
-              if (task['completed'])
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  child: Icon(
-                    Icons.check_circle,
-                    color: AppColors.customGreen,
+              Positioned(
+                right: 0,
+                top: 0,
+                child: IconButton(
+                  icon: Icon(
+                    task['completed']
+                        ? Icons.check_circle
+                        : Icons.check_circle_outline,
+                    color:
+                        task['completed'] ? AppColors.customGreen : Colors.grey,
                     size: 24,
                   ),
+                  onPressed: () {
+                    setState(() {
+                      task['completed'] = !task['completed'];
+                    });
+                  },
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  constraints: const BoxConstraints(),
+                  padding: EdgeInsets.zero,
+                  tooltip:
+                      task['completed'] ? 'Mark as not done' : 'Mark as done',
                 ),
+              ),
             ],
           ),
         ),

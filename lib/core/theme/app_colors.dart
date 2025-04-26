@@ -10,4 +10,5 @@ class AppColors {
   static const Color cardLight = Color(0xFFFFFFFF);
   static const Color cardDark = Color(0xFF1E1E1E);
   static const Color customGreen = Color(0xFF57cc99);
+  static const Color customRed = Color(0xFFc1121f);
 }
