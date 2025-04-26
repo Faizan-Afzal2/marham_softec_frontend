@@ -1,7 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:marham_softec/core/theme/app_colors.dart';
+import 'package:marham_softec/core/widgets/app_textfeild.dart';
+import 'package:marham_softec/core/widgets/border_button.dart';
 import 'package:marham_softec/core/widgets/custom_app_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:marham_softec/core/widgets/primary_button.dart';
@@ -19,15 +20,28 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   void initState() {
     super.initState();
-    print('Data received: ${widget.data}');
   }
 
   TextEditingController taskNameController = TextEditingController();
   TextEditingController taskDescriptionController = TextEditingController();
-  TextEditingController taskSubtasksController = TextEditingController();
+  TextEditingController taskCategoryController = TextEditingController();
   DateTime dueDate = DateTime.now();
   XFile? pickedImage;
   bool isRecording = false;
+
+  Future<void> _pickDueDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: dueDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != dueDate) {
+      setState(() {
+        dueDate = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,46 +56,42 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                TextField(
+                AppTextField(
                   controller: taskNameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Task Name',
-                  ),
+                  hintText: 'Task name',
+                  // prefixIcon: Icons.task,
                 ),
                 const SizedBox(height: 16),
-                TextField(
+                AppTextField(
                   controller: taskDescriptionController,
-                  decoration: const InputDecoration(
-                    labelText: 'Task Description',
-                  ),
+                  hintText: 'Task Description',
+                  // prefixIcon: Icons.description,
                 ),
                 const SizedBox(height: 16),
-                TextField(
-                  controller: taskSubtasksController,
-                  decoration: const InputDecoration(
-                    labelText: 'Sub Tasks',
-                  ),
+                AppTextField(
+                  controller: taskCategoryController,
+                  hintText: 'Category',
+                  // prefixIcon: Icons.description,
                 ),
                 const SizedBox(height: 16),
-                Row(
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Due Date: ${dueDate.toLocal()}'),
-                    const SizedBox(width: 8),
-                    ElevatedButton(
-                      onPressed: () {
-                        // TODO: Implement Date Picker functionality
-                      },
-                      child: const Text('Pick Date'),
-                    ),
+                    Text('Selected Date: ${dueDate.toLocal().toString().split(' ')[0]}'),
+
+                    SizedBox(height: 20),
+                    Padding(
+                    padding: EdgeInsetsDirectional.all(20),
+                    child:
+                        BorderButton(text: 'Pick a Date', onPressed: _pickDueDate)),
+                    
                   ],
                 ),
                 const SizedBox(height: 24),
-                ElevatedButton(
-                  onPressed: () {
-                    // TODO: Implement Text Task Submit functionality
-                  },
-                  child: const Text('Submit Task'),
-                ),
+                Padding(
+                    padding: EdgeInsetsDirectional.all(20),
+                    child:
+                        PrimaryButton(text: 'Submit Task', onPressed: () {})),
               ],
             ),
           ),
@@ -137,13 +147,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 const SizedBox(height: 24),
                 Padding(
                     padding: EdgeInsetsDirectional.all(20),
-                    child: PrimaryButton(
-                        text: 'Pick an image', onPressed: () {})),
+                    child:
+                        BorderButton(text: 'Pick an image', onPressed: () {})),
                 const SizedBox(height: 16),
                 Padding(
                     padding: EdgeInsetsDirectional.all(20),
-                    child: PrimaryButton(
-                        text: 'Submit image', onPressed: () {})),
+                    child:
+                        PrimaryButton(text: 'Submit image', onPressed: () {})),
               ],
             ),
           ),
