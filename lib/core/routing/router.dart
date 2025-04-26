@@ -33,6 +33,13 @@ final router = GoRouter(
       path: '/calendar', // <<< add this outside the ShellRoute
       builder: (context, state) => const CalendarScreen(),
     ),
+    GoRoute(
+      path: '/addTask',
+      builder: (context, state) {
+        final String data = state.extra as String;
+        return AddTaskScreen(data: data);
+      },
+    ),
     ShellRoute(
       builder: (context, state, child) {
         return RootScreen(
@@ -47,10 +54,6 @@ final router = GoRouter(
         GoRoute(
           path: '/mood',
           builder: (context, state) => const MoodScreen(),
-        ),
-        GoRoute(
-          path: '/addTask',
-          builder: (context, state) => const AddTask(),
         ),
         GoRoute(
           path: '/progress',
