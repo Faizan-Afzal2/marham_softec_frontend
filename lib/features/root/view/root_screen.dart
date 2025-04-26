@@ -45,8 +45,8 @@ class _RootScreenState extends State<RootScreen> {
           ),
           BottomBarItem(
             selectedColor: AppColors.backgroundDark,
-            icon: Icon(Icons.emoji_emotions_outlined),
-            selectedIcon: Icon(Icons.emoji_emotions),
+            icon: Icon(Icons.edit_calendar_outlined),
+            selectedIcon: Icon(Icons.edit_calendar),
             title: Text('Planner'),
           ),
           BottomBarItem(
