@@ -37,7 +37,7 @@ Widget build(BuildContext context) {
       child: Icon(
         Icons.calendar_today,
         size: 28,
-        color: Colors.white,
+        color: AppColors.backgroundLight,
       ),
     ),
   );

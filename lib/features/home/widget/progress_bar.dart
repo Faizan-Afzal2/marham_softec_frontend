@@ -17,13 +17,13 @@ class ProgressFloatingCard extends StatelessWidget {
           child: Material(
             elevation: 8,
             borderRadius: BorderRadius.circular(40),
-            color: Colors.white,
+            color: AppColors.backgroundLight,
             child: Container(
               width: MediaQuery.of(context).size.width * 0.9, // 90% screen width
               height: MediaQuery.of(context).size.height * 0.155,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.backgroundLight,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(

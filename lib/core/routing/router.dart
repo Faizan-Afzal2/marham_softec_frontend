@@ -39,6 +39,14 @@ final router = GoRouter(
       path: '/calendar', // <<< add this outside the ShellRoute
       builder: (context, state) => const CalendarScreen(),
     ),
+    GoRoute(
+  path: '/addTask',
+  builder: (context, state) {
+    final String data = state.extra as String;
+    return AddTaskScreen(data: data);
+  },
+),
+
     ShellRoute(
       builder: (context, state, child) {
         return RootScreen(child: child,);// Always show nav bar
@@ -53,9 +61,6 @@ final router = GoRouter(
           builder: (context, state) => const MoodScreen(),
         ),
         GoRoute(
-          path: '/addTask',
-          builder: (context, state) => const AddTask(),
-        ),GoRoute(
           path: '/progress',
           builder: (context, state) => const ProgressScreen(),
         ),GoRoute(
