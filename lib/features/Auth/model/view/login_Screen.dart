@@ -40,78 +40,80 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Spacer(),
-                Text(
-                  "MARHAM",
-                  style: AppFonts.title,
-                ),
-                Spacer(),
-                AppTextField(
-                  controller: _emailController,
-                  hintText: 'Enter your email',
-                  prefixIcon: Icons.email,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                      return 'Please enter a valid email';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
-                AppTextField(
-                  controller: _passwordController,
-                  hintText: 'Enter your password',
-                  prefixIcon: Icons.lock,
-                  obscureText: _obscurePassword,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    if (value.length < 6) {
-                      return 'Password must be at least 6 characters';
-                    }
-                    return null;
-                  },
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscurePassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: AppColors.backgroundDark,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscurePassword = !_obscurePassword;
-                      });
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  SizedBox(height: 100),
+                  Text(
+                    "MARHAM",
+                    style: AppFonts.title,
+                  ),
+                  SizedBox(height: 160),
+                  AppTextField(
+                    controller: _emailController,
+                    hintText: 'Enter your email',
+                    prefixIcon: Icons.email,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                        return 'Please enter a valid email';
+                      }
+                      return null;
                     },
                   ),
-                  textInputAction: TextInputAction.done,
-                ),
-                const Spacer(),
-                PrimaryButton(
-                  onPressed: _login,
-                  text: 'Login',
-                ),
-                SizedBox(height: 14),
-                BorderButton(
-                  onPressed: () {
-                    context.push('/signup');
-                  },
-                  text: 'Create an account',
-                ),
-                SizedBox(height: 24),
-              ],
+                  const SizedBox(height: 16),
+                  AppTextField(
+                    controller: _passwordController,
+                    hintText: 'Enter your password',
+                    prefixIcon: Icons.lock,
+                    obscureText: _obscurePassword,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      if (value.length < 6) {
+                        return 'Password must be at least 6 characters';
+                      }
+                      return null;
+                    },
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscurePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: AppColors.backgroundDark,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                    ),
+                    textInputAction: TextInputAction.done,
+                  ),
+                  SizedBox(height: 160),
+                  PrimaryButton(
+                    onPressed: _login,
+                    text: 'Login',
+                  ),
+                  SizedBox(height: 14),
+                  BorderButton(
+                    onPressed: () {
+                      context.push('/signup');
+                    },
+                    text: 'Create an account',
+                  ),
+                  SizedBox(height: 24),
+                ],
+              ),
             ),
           ),
         ),
