@@ -46,7 +46,7 @@ class AppTextField extends StatelessWidget {
         hintText: hintText,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
-        fillColor: AppColors.backgroundLight,
+        fillColor:   AppColors.backgroundLight,
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
