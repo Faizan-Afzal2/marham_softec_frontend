@@ -33,3 +33,25 @@ class CustomSnackbar extends SnackBar {
           ),
         );
 }
+
+void showSuccessSnackbar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    CustomSnackbar(
+      title: "Success",
+      message: message,
+      icon: Icons.check_circle,
+      backgroundColor: Colors.green,
+    ),
+  );
+}
+
+void showErrorSnackbar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    CustomSnackbar(
+      title: "Error",
+      message: message,
+      icon: Icons.error,
+      backgroundColor: Colors.red,
+    ),
+  );
+}

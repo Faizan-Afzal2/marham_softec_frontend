@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:marham_softec/features/home/controller/home_controller.dart';
+import 'package:marham_softec/features/Auth/model/controller/auth_controller.dart';
+import 'package:marham_softec/services/local_storage_service.dart';
 import 'package:provider/provider.dart';
 import 'core/theme/theme.dart';
 import 'core/routing/router.dart';
 import 'providers/theme_provider.dart';
 import 'services/dialog_service.dart';
 
-void main() {
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorageService.init();
   runApp(const MyApp());
 }
 
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => HomeController()..loadUsers()),
+        ChangeNotifierProvider(create: (_) => AuthController()),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) {

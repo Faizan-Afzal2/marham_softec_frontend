@@ -5,6 +5,8 @@ import 'package:marham_softec/core/theme/app_fonts.dart';
 import 'package:marham_softec/core/widgets/app_textfeild.dart';
 import 'package:marham_softec/core/widgets/border_button.dart';
 import 'package:marham_softec/core/widgets/primary_button.dart';
+import 'package:marham_softec/features/Auth/model/controller/auth_controller.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -14,32 +16,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _userName = TextEditingController();
-
-  bool _obscurePassword = true; // For password eye toggle
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  void _login() {
-    if (_formKey.currentState?.validate() ?? false) {
-      final email = _emailController.text.trim();
-      final password = _passwordController.text;
-
-      // TODO: Call your login API here with email and password
-      print('Email: $email, Password: $password');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<AuthController>(context);
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -50,7 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Form(
-                key: _formKey,
+                key: controller.signUpFormKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -61,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Text("Create an account", style: AppFonts.heading),
                     SizedBox(height: 8),
                     AppTextField(
-                      controller: _emailController,
+                      controller: controller.userName,
                       hintText: 'Enter your Name',
                       prefixIcon: Icons.email,
                       keyboardType: TextInputType.emailAddress,
@@ -77,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 16),
                     AppTextField(
-                      controller: _emailController,
+                      controller: controller.emailController,
                       hintText: 'Enter your email',
                       prefixIcon: Icons.email,
                       keyboardType: TextInputType.emailAddress,
@@ -93,10 +73,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 16),
                     AppTextField(
-                      controller: _passwordController,
+                      controller: controller.passwordController,
                       hintText: 'Enter your password',
                       prefixIcon: Icons.lock,
-                      obscureText: _obscurePassword,
+                      obscureText: controller.signUpObscurePassword,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your password';
@@ -108,22 +88,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _obscurePassword
+                          controller.signUpObscurePassword
                               ? Icons.visibility_off
                               : Icons.visibility,
                           color: AppColors.backgroundDark,
                         ),
                         onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
+                          controller.signUpToggle();
                         },
                       ),
                       textInputAction: TextInputAction.done,
                     ),
                     SizedBox(height: 100),
                     PrimaryButton(
-                      onPressed: _login,
+                      onPressed: () {
+                        controller.signup(context);
+                      },
                       text: 'Create Account',
                     ),
                     SizedBox(height: 14),

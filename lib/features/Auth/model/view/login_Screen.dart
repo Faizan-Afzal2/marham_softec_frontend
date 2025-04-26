@@ -5,6 +5,8 @@ import 'package:marham_softec/core/theme/app_fonts.dart';
 import 'package:marham_softec/core/widgets/app_textfeild.dart';
 import 'package:marham_softec/core/widgets/border_button.dart';
 import 'package:marham_softec/core/widgets/primary_button.dart';
+import 'package:marham_softec/features/Auth/model/controller/auth_controller.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,38 +16,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  bool _obscurePassword = true; // For password eye toggle
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  void _login() {
-    if (_formKey.currentState?.validate() ?? false) {
-      final email = _emailController.text.trim();
-      final password = _passwordController.text;
-
-      // TODO: Call your login API here with email and password
-      print('Email: $email, Password: $password');
-    }
+  void initState() {
+    super.initState();
+    // Use listen: false to avoid calling setState in initState
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<AuthController>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Form(
-              key: _formKey,
+              key: controller.formKey,
               child: Column(
                 children: [
                   SizedBox(height: 100),
@@ -55,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 160),
                   AppTextField(
-                    controller: _emailController,
+                    controller: controller.emailController,
                     hintText: 'Enter your email',
                     prefixIcon: Icons.email,
                     keyboardType: TextInputType.emailAddress,
@@ -71,10 +57,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 16),
                   AppTextField(
-                    controller: _passwordController,
+                    controller: controller.passwordController,
                     hintText: 'Enter your password',
                     prefixIcon: Icons.lock,
-                    obscureText: _obscurePassword,
+                    obscureText: controller.loginObscurePassword,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your password';
@@ -86,22 +72,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscurePassword
+                        controller.loginObscurePassword
                             ? Icons.visibility_off
                             : Icons.visibility,
                         color: AppColors.backgroundDark,
                       ),
                       onPressed: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
+                        controller.toggle();
                       },
                     ),
                     textInputAction: TextInputAction.done,
                   ),
                   SizedBox(height: 160),
                   PrimaryButton(
-                    onPressed: _login,
+                    onPressed: () {
+                      controller.login(context);
+                    },
                     text: 'Login',
                   ),
                   SizedBox(height: 14),
