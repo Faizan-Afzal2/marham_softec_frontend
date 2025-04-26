@@ -10,32 +10,33 @@ import 'package:marham_softec/features/home/widget/progress_bar.dart';
 import 'package:marham_softec/features/home/widget/task_list_widget.dart';
 
 class HomeScreen extends StatefulWidget {
-    static const List<Map<String, dynamic>> tasks=[
-{
-    'category': 'Work',
-    'taskName': 'Complete Task A',
-    'dueDate': '2025-04-28',
-    'color': 0xFFD6EAF8 // Very light blue
-  },
-  {
-    'category': 'Personal',
-    'taskName': 'Buy Groceries',
-    'dueDate': '2025-04-29',
-    'color': 0xFFFADBD8 // Very light pink
-  },
-  {
-    'category': 'Work',
-    'taskName': 'Attend Meeting',
-    'dueDate': '2025-04-30',
-    'color': 0xFFD6EAF8 // Very light blue (same as Work above)
-  },
-  {
-    'category': 'Health',
-    'taskName': 'Morning Workout',
-    'dueDate': '2025-04-27',
-    'color': 0xFFD5F5E3 // Very light green
-  },
+  static const List<Map<String, dynamic>> tasks = [
+    {
+      'category': 'Work',
+      'taskName': 'Complete Task A',
+      'dueDate': '2025-04-28',
+      'color': 0xFFD6EAF8 // Very light blue
+    },
+    {
+      'category': 'Personal',
+      'taskName': 'Buy Groceries',
+      'dueDate': '2025-04-29',
+      'color': 0xFFFADBD8 // Very light pink
+    },
+    {
+      'category': 'Work',
+      'taskName': 'Attend Meeting',
+      'dueDate': '2025-04-30',
+      'color': 0xFFD6EAF8 // Very light blue (same as Work above)
+    },
+    {
+      'category': 'Health',
+      'taskName': 'Morning Workout',
+      'dueDate': '2025-04-27',
+      'color': 0xFFD5F5E3 // Very light green
+    },
   ];
+  static bool hasNotification = true;
   const HomeScreen({super.key});
 
   @override
@@ -53,6 +54,57 @@ class _HomeScreenState extends State<HomeScreen> {
             // padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Hello',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey[800],
+                          ),
+                        ),
+                        SizedBox(
+                            height:
+                                4), // Small space between Hello and Username
+                        Text('Abd', style: AppFonts.heading),
+                      ],
+                    ),
+                    Stack(
+        children: [
+          IconButton(
+            onPressed: () {
+              // Handle notification icon tap
+            },
+            icon: Icon(
+              Icons.notifications_none,
+              size: 28,
+            ),
+          ),
+          if (HomeScreen.hasNotification)
+            Positioned(
+              right: 8,
+              top: 8,
+              child: Container(
+                width: 10,
+                height: 10,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+        ],
+      ),
+
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 ProgressFloatingCard(progressPercent: 0.7),
                 SizedBox(
                   height: 10,
@@ -61,12 +113,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                HorizontalBar(
-                   tasks :HomeScreen.tasks
-
-                ),
+                HorizontalBar(tasks: HomeScreen.tasks),
                 TaskListWidget(tasks: HomeScreen.tasks)
-                ],
+              ],
             ),
           ),
         ),
