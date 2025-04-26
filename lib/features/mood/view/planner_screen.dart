@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:marham_softec/core/theme/app_colors.dart';
 import 'package:marham_softec/core/theme/app_fonts.dart';
 
 class PlannerScreen extends StatefulWidget {
@@ -65,7 +66,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
             ),
             _buildDatePicker(),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: _buildFilters(),
             ),
             Expanded(
@@ -92,7 +93,8 @@ class _PlannerScreenState extends State<PlannerScreen> {
               width: 60,
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: isSelected ? Colors.blueGrey[800] : Colors.transparent,
+                color:
+                    isSelected ? AppColors.backgroundDark : Colors.transparent,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -101,7 +103,9 @@ class _PlannerScreenState extends State<PlannerScreen> {
                   Text(
                     DateFormat('EEE').format(date),
                     style: TextStyle(
-                      color: isSelected ? Colors.white : Colors.grey,
+                      color: isSelected
+                          ? AppColors.backgroundLight
+                          : AppColors.backgroundDark,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -110,7 +114,9 @@ class _PlannerScreenState extends State<PlannerScreen> {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: isSelected ? Colors.white : Colors.grey,
+                      color: isSelected
+                          ? AppColors.backgroundLight
+                          : AppColors.backgroundDark,
                     ),
                   ),
                 ],
@@ -134,20 +140,23 @@ class _PlannerScreenState extends State<PlannerScreen> {
             onTap: () => setState(() => _selectedFilter = filter),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              margin: const EdgeInsets.symmetric(horizontal: 4),
+              margin: const EdgeInsets.symmetric(
+                horizontal: 4,
+              ),
               decoration: BoxDecoration(
                 color: _selectedFilter == filter
-                    ? Colors.blueGrey[800]
+                    ? AppColors.backgroundDark
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.blueGrey.shade700),
+                border: Border.all(color: AppColors.backgroundDark),
               ),
               child: Center(
                 child: Text(
                   filter,
                   style: TextStyle(
-                    color:
-                        _selectedFilter == filter ? Colors.white : Colors.grey,
+                    color: _selectedFilter == filter
+                        ? AppColors.backgroundLight
+                        : AppColors.backgroundDark,
                   ),
                 ),
               ),
@@ -159,12 +168,9 @@ class _PlannerScreenState extends State<PlannerScreen> {
   }
 
   Widget _buildTaskList() {
-    return ListView.separated(
+    return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: _tasks.length,
-      separatorBuilder: (context, index) => Divider(
-        height: 24,
-      ),
       itemBuilder: (context, index) {
         final task = _tasks[index];
         return _buildTaskItem(task, 0);
@@ -177,123 +183,94 @@ class _PlannerScreenState extends State<PlannerScreen> {
     return Padding(
       padding: EdgeInsets.only(left: indentLevel * 20.0),
       child: Card(
-        color: Colors.blueGrey[900],
-        margin: const EdgeInsets.symmetric(vertical: 4),
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-          side: BorderSide(color: Colors.blueGrey.shade800, width: 1),
-        ),
+        color: AppColors.backgroundLight,
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        elevation: 8,
         child: Padding(
           padding: const EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              Row(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Checkbox(
-                    value: task['completed'],
-                    onChanged: (value) => setState(
-                      () => task['completed'] = value ?? false,
-                    ),
-                    fillColor: MaterialStateProperty.resolveWith<Color>(
-                      (states) => task['completed']
-                          ? Colors.greenAccent
-                          : Colors.blueGrey[800]!,
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: Text(
-                                task['title'],
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                            Text(
+                              task['title'],
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
-                            if (task['completed'])
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color: Colors.greenAccent.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(4),
-                                  border: Border.all(
-                                      color: Colors.greenAccent, width: 1),
+                            const SizedBox(height: 4),
+                            Text(
+                              task['description'],
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.access_time,
+                                  size: 14,
+                                  color: Colors.blueGrey[300],
                                 ),
-                                child: Text(
-                                  'Done',
+                                const SizedBox(width: 4),
+                                Text(
+                                  DateFormat('hh:mm a').format(dueDate),
                                   style: TextStyle(
-                                    color: Colors.greenAccent,
+                                    color: Colors.blueGrey[300],
                                     fontSize: 12,
-                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                              ),
-                          ],
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          task['description'],
-                          style: TextStyle(
-                            color: Colors.grey[400],
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.access_time,
-                              size: 14,
-                              color: Colors.blueGrey[300],
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              DateFormat('hh:mm a').format(dueDate),
-                              style: TextStyle(
-                                color: Colors.blueGrey[300],
-                                fontSize: 12,
-                              ),
-                            ),
-                            const Spacer(),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: _getCategoryColor(task['category'])
-                                    .withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(4),
-                                border: Border.all(
-                                    color: _getCategoryColor(task['category']),
-                                    width: 1),
-                              ),
-                              child: Text(
-                                task['category'],
-                                style: TextStyle(
-                                  color: _getCategoryColor(task['category']),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
+                                const Spacer(),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: _getCategoryColor(task['category'])
+                                        .withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(4),
+                                    border: Border.all(
+                                        color:
+                                            _getCategoryColor(task['category']),
+                                        width: 1),
+                                  ),
+                                  child: Text(
+                                    task['category'],
+                                    style: TextStyle(
+                                      color:
+                                          _getCategoryColor(task['category']),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-              ...(task['subtasks'] as List).map<Widget>(
-                (subtask) => _buildTaskItem(subtask, indentLevel + 1),
-              ),
+              if (task['completed'])
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Icon(
+                    Icons.check_circle,
+                    color: AppColors.customGreen,
+                    size: 24,
+                  ),
+                ),
             ],
           ),
         ),
