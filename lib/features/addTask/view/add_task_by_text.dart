@@ -12,7 +12,7 @@ class AddTaskThroughText extends StatefulWidget {
 }
 
 class _AddTaskThroughTextState extends State<AddTaskThroughText> {
-   TextEditingController taskNameController = TextEditingController();
+  TextEditingController taskNameController = TextEditingController();
   TextEditingController taskDescriptionController = TextEditingController();
   TextEditingController taskCategoryController = TextEditingController();
   DateTime dueDate = DateTime.now();
@@ -33,51 +33,49 @@ class _AddTaskThroughTextState extends State<AddTaskThroughText> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-          appBar: CustomAppBar(title: 'Add Task - Text'),
-          body: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
+    return Scaffold(
+      appBar: CustomAppBar(title: 'Add Task - Text'),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            AppTextField(
+              controller: taskNameController,
+              hintText: 'Task name',
+              // prefixIcon: Icons.task,
+            ),
+            const SizedBox(height: 16),
+            AppTextField(
+              controller: taskDescriptionController,
+              hintText: 'Task Description',
+              // prefixIcon: Icons.description,
+            ),
+            const SizedBox(height: 16),
+            AppTextField(
+              controller: taskCategoryController,
+              hintText: 'Category',
+              // prefixIcon: Icons.description,
+            ),
+            const SizedBox(height: 16),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AppTextField(
-                  controller: taskNameController,
-                  hintText: 'Task name',
-                  // prefixIcon: Icons.task,
-                ),
-                const SizedBox(height: 16),
-                AppTextField(
-                  controller: taskDescriptionController,
-                  hintText: 'Task Description',
-                  // prefixIcon: Icons.description,
-                ),
-                const SizedBox(height: 16),
-                AppTextField(
-                  controller: taskCategoryController,
-                  hintText: 'Category',
-                  // prefixIcon: Icons.description,
-                ),
-                const SizedBox(height: 16),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Selected Date: ${dueDate.toLocal().toString().split(' ')[0]}'),
-
-                    SizedBox(height: 20),
-                    Padding(
-                    padding: EdgeInsetsDirectional.all(20),
-                    child:
-                        BorderButton(text: 'Pick a Date', onPressed: _pickDueDate)),
-                    
-                  ],
-                ),
-                const SizedBox(height: 24),
+                Text(
+                    'Selected Date: ${dueDate.toLocal().toString().split(' ')[0]}'),
+                SizedBox(height: 20),
                 Padding(
                     padding: EdgeInsetsDirectional.all(20),
-                    child:
-                        PrimaryButton(text: 'Submit Task', onPressed: () {})),
+                    child: BorderButton(
+                        text: 'Pick a Date', onPressed: _pickDueDate)),
               ],
             ),
-          ),
-        );
+            const SizedBox(height: 24),
+            Padding(
+                padding: EdgeInsetsDirectional.all(20),
+                child: PrimaryButton(text: 'Submit Task', onPressed: () {})),
+          ],
+        ),
+      ),
+    );
   }
 }
