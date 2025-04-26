@@ -41,6 +41,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   stylish_bottom_bar: ^1.1.1
   percent_indicator: ^4.2.5
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:

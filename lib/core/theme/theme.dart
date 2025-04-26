@@ -12,8 +12,8 @@ class AppTheme {
       headlineSmall: AppFonts.heading,
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.primary,
-      foregroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundLight,
+      foregroundColor: Colors.black,
     ),
   );
 

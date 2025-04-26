@@ -6,7 +6,7 @@ import 'package:marham_softec/features/Splash/splash_screen.dart';
 import 'package:marham_softec/features/addTask/view/add_task_screen.dart';
 import 'package:marham_softec/features/calender/view/calender_screen.dart';
 import 'package:marham_softec/features/home/view/home_screen.dart';
-import 'package:marham_softec/features/mood/view/mood_screen.dart';
+import 'package:marham_softec/features/mood/view/planner_screen.dart';
 import 'package:marham_softec/features/progress/view/progress_screen.dart';
 import 'package:marham_softec/features/root/view/root_screen.dart';
 import 'package:marham_softec/features/setting/view/setting_screen.dart';
@@ -52,8 +52,8 @@ final router = GoRouter(
           builder: (context, state) => const HomeScreen(),
         ),
         GoRoute(
-          path: '/mood',
-          builder: (context, state) => const MoodScreen(),
+          path: '/planner',
+          builder: (context, state) => const PlannerScreen(),
         ),
         GoRoute(
           path: '/progress',

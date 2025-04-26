@@ -4,7 +4,6 @@ import 'package:marham_softec/core/theme/app_colors.dart';
 import 'package:marham_softec/features/root/widgets/add_task_dialog.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
-
 class RootScreen extends StatefulWidget {
   final Widget child;
 
@@ -19,7 +18,7 @@ class _RootScreenState extends State<RootScreen> {
 
   final List<String> _routes = [
     '/home',
-    '/mood',
+    '/planner',
     '/addTask', // Center button (No longer used for navigation)
     '/progress',
     '/setting',
@@ -48,7 +47,7 @@ class _RootScreenState extends State<RootScreen> {
             selectedColor: AppColors.backgroundDark,
             icon: Icon(Icons.emoji_emotions_outlined),
             selectedIcon: Icon(Icons.emoji_emotions),
-            title: Text('Mood'),
+            title: Text('Planner'),
           ),
           BottomBarItem(
             selectedColor: AppColors.backgroundDark,
@@ -58,11 +57,9 @@ class _RootScreenState extends State<RootScreen> {
                 shape: BoxShape.circle,
                 color: AppColors.backgroundDark,
               ),
-              child: Icon(
-                Icons.add,
-                size: 36, // Larger icon size
-                color: AppColors.backgroundLight
-              ),
+              child: Icon(Icons.add,
+                  size: 36, // Larger icon size
+                  color: AppColors.backgroundLight),
             ),
             title: Text('Add'),
           ),
