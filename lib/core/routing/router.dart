@@ -22,10 +22,6 @@ final router = GoRouter(
       builder: (context, state) => const SplashScreen(),
     ),
     GoRoute(
-      path: '/home',
-      builder: (context, state) => const HomeScreen(),
-    ),
-    GoRoute(
       path: '/',
       builder: (context, state) => const LoginScreen(),
     ),

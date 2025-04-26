@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:marham_softec/core/theme/app_colors.dart';
 import 'package:marham_softec/features/home/widget/progress_bar.dart';
-import 'package:provider/provider.dart';
-import '../controller/home_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,8 +13,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<HomeController>(context);
-
     return Scaffold(
       body: Stack(
         children: [
