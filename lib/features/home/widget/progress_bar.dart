@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marham_softec/core/theme/app_colors.dart';
+import 'package:marham_softec/core/theme/app_fonts.dart';
+import 'package:marham_softec/core/widgets/border_button.dart';
+import 'package:marham_softec/core/widgets/primary_button.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ProgressFloatingCard extends StatelessWidget {
@@ -12,15 +15,14 @@ class ProgressFloatingCard extends StatelessWidget {
     return SafeArea(
       child: Align( // <<< Important
         alignment: Alignment.topCenter, // Top Center
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        
           child: Material(
             elevation: 8,
             borderRadius: BorderRadius.circular(40),
             color: AppColors.backgroundLight,
             child: Container(
               width: MediaQuery.of(context).size.width * 0.9, // 90% screen width
-              height: MediaQuery.of(context).size.height * 0.155,
+              // height: MediaQuery.of(context).size.height * 0.155,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               decoration: BoxDecoration(
                 color: AppColors.backgroundLight,
@@ -34,19 +36,18 @@ class ProgressFloatingCard extends StatelessWidget {
                     children: [
                       Text(
                         "Your Progress",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
+                        style: AppFonts.subheading,
                       ),
                       SizedBox(height: 6),
                       Text(
                         "Keep it up!",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[700],
-                        ),
+                        style: AppFonts.body,
                       ),
+                      SizedBox(height: 10,),
+                      Container(
+                        width: 90,
+                        child: PrimaryButton(text: 'View Task', onPressed: (){}))
+                      // BorderButton(text: 'Hello', onPressed: (){})
                     ],
                   ),
                   Spacer(),
@@ -71,7 +72,7 @@ class ProgressFloatingCard extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        
       ),
     );
   }

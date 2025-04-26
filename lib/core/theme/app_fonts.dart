@@ -6,6 +6,10 @@ class AppFonts {
     fontSize: 20,
     fontWeight: FontWeight.bold,
   );
+  static TextStyle subheading = GoogleFonts.poppins(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
 
   static TextStyle body = GoogleFonts.poppins(
     fontSize: 14,
