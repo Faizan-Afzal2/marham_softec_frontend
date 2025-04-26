@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:marham_softec/core/theme/app_colors.dart';
 import 'package:provider/provider.dart';
 import '../controller/home_controller.dart';
+import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,8 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // Use listen: false to avoid calling setState in initState
-    Provider.of<HomeController>(context, listen: false)
-        .loadUsers(isLoadMore: false);
   }
 
   @override
@@ -23,22 +24,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final controller = Provider.of<HomeController>(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Users')),
-      body: controller.isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(
-                itemCount: controller.users.length,
-                itemBuilder: (context, index) {
-                  final user = controller.users[index];
-                  return ListTile(
-                    title: Text(user.name),
-                    subtitle: Text(user.email),
-                  );
-                },
-              ),
-            ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Text('HomeScreen'),
+        ),
+      ),
     );
   }
 }

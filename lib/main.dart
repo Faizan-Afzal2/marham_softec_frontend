@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => HomeController()..loadUsers()),
+        ChangeNotifierProvider(create: (_) => HomeController()),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) {

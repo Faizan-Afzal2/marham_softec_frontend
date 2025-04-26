@@ -1,0 +1,22 @@
+import 'package:flutter/material.dart';
+
+class AddTask extends StatefulWidget {
+  const AddTask({super.key});
+
+  @override
+  State<AddTask> createState() => _AddTaskState();
+}
+
+class _AddTaskState extends State<AddTask> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Text('Add Task Screen'),
+        ),
+      ),
+    );
+  }
+}

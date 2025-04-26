@@ -34,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       // TODO: Call your login API here with email and password
       print('Email: $email, Password: $password');
+      context.push('/home');
     }
   }
 
