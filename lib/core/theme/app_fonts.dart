@@ -11,4 +11,9 @@ class AppFonts {
     fontSize: 14,
     fontWeight: FontWeight.normal,
   );
+
+  static TextStyle title = GoogleFonts.poppins(
+    fontSize: 34,
+    fontWeight: FontWeight.bold,
+  );
 }
