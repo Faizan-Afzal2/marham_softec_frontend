@@ -77,24 +77,14 @@ class HorizontalBar extends StatelessWidget {
                           ),
                           // const SizedBox(height: 8),
                           // Due date with checkbox
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
+                          Text(
                                 tasks[index]['dueDate'] ?? '2025-04-28', // Due date
                                 style: TextStyle(
                                   color: Colors.grey[600],
                                   fontSize: 12,
                                 ),
                               ),
-                              Checkbox(
-                                value: false, // Change this to dynamic value based on task state
-                                onChanged: (bool? value) {
-                                  // Handle checkbox state change
-                                },
-                              ),
-                            ],
-                          ),
+                           
                         ],
                       ),
                     ),

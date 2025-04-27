@@ -89,7 +89,7 @@ GoRoute(
         ),
         GoRoute(
           path: '/progress',
-          builder: (context, state) => const ProgressScreen(),
+          builder: (context, state) =>  ProgressScreen(),
         ),
         GoRoute(
           path: '/setting',
