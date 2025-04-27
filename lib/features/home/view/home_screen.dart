@@ -71,10 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         SizedBox(height: 4),
-                        controller.user != null
-                            ? Text(controller.user!.name,
-                                style: AppFonts.heading)
-                            : Container()
+                        Text("khubaib", style: AppFonts.heading)
                       ],
                     ),
                     Stack(

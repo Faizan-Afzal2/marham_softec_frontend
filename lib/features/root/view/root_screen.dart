@@ -33,7 +33,7 @@ class _RootScreenState extends State<RootScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final controller =
           Provider.of<RootScreenController>(context, listen: false);
-      controller.fetchMe();
+      // controller.fetchMe();
     });
   }
 

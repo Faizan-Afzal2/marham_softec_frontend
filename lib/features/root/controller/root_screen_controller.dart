@@ -6,27 +6,27 @@ import 'package:marham_softec/services/user_service.dart';
 class RootScreenController with ChangeNotifier {
   UserService _userService = new UserService();
 
-  late UserModel user;
+  // late UserModel user;
   bool isLoading = false;
 
   DateTime dueDate = DateTime.now();
   // final List<String> categories = ['Work', 'Personal', 'Study', 'Other'];
 
-  Future<void> fetchMe() async {
-    isLoading = true;
-    notifyListeners();
-    try {
-      final response = await _userService.fetchMe();
-      print(response);
-      if (response.success) {
-        final apiData = UserApiResponse.fromJson(response);
-        user = apiData.data;
-      }
-    } finally {
-      isLoading = false;
-      notifyListeners();
-    }
-  }
+  // Future<void> fetchMe() async {
+  //   isLoading = true;
+  //   notifyListeners();
+  //   try {
+  //     final response = await _userService.fetchMe();
+  //     print(response);
+  //     if (response.success) {
+  //       final apiData = UserApiResponse.fromJson(response);
+  //       user = apiData.data;
+  //     }
+  //   } finally {
+  //     isLoading = false;
+  //     notifyListeners();
+  //   }
+  // }
 
   // void createTask(context) async {
   //   final response = await _createtaskService.createtask(
