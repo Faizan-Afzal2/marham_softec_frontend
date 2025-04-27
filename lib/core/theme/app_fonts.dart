@@ -20,4 +20,8 @@ class AppFonts {
     fontSize: 34,
     fontWeight: FontWeight.bold,
   );
+  static TextStyle splash = GoogleFonts.poppins(
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+  );
 }
