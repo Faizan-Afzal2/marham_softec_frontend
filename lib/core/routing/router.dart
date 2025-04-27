@@ -3,13 +3,19 @@ import 'package:go_router/go_router.dart';
 import 'package:marham_softec/features/Auth/model/view/login_Screen.dart';
 import 'package:marham_softec/features/Auth/model/view/signup_screen.dart';
 import 'package:marham_softec/features/Splash/splash_screen.dart';
+import 'package:marham_softec/features/TaskDetail/view/task_detail_screen.dart';
 import 'package:marham_softec/features/addTask/view/add_task_screen.dart';
 import 'package:marham_softec/features/calender/view/calender_screen.dart';
 import 'package:marham_softec/features/home/view/home_screen.dart';
 import 'package:marham_softec/features/mood/view/planner_screen.dart';
 import 'package:marham_softec/features/progress/view/progress_screen.dart';
 import 'package:marham_softec/features/root/view/root_screen.dart';
+import 'package:marham_softec/features/setting/view/about.dart';
+import 'package:marham_softec/features/setting/view/log_out.dart';
+import 'package:marham_softec/features/setting/view/privacy_policy.dart';
 import 'package:marham_softec/features/setting/view/setting_screen.dart';
+import 'package:marham_softec/features/setting/view/terms_condition.dart';
+import 'package:marham_softec/features/setting/view/theme.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -40,6 +46,32 @@ final router = GoRouter(
         return AddTaskScreen(data: data);
       },
     ),
+   GoRoute(
+  path: '/taskDetail',
+  builder: (context, state) {
+    // Make sure you are correctly casting the `extra` as Map<String, dynamic>
+    final Map<String, dynamic> taskData = state.extra as Map<String, dynamic>;
+    print('Task Data received: $taskData'); // Print to verify
+
+    // Pass the map to the TaskDetailScreen
+    return TaskDetailScreen(data: taskData); 
+  },
+),
+GoRoute(
+      path: '/themeChange', // <<< add this outside the ShellRoute
+      builder: (context, state) => const ThemeChangeScreen(),
+    ),GoRoute(
+      path: '/privacyPolicy', // <<< add this outside the ShellRoute
+      builder: (context, state) => const PrivacyPolicyScreen(),
+    ),GoRoute(
+      path: '/termsScreen', // <<< add this outside the ShellRoute
+      builder: (context, state) => const TermsScreen(),
+    ),GoRoute(
+      path: '/about', // <<< add this outside the ShellRoute
+      builder: (context, state) => const AboutAppScreen(),
+    ),
+
+
     ShellRoute(
       builder: (context, state, child) {
         return RootScreen(
@@ -61,7 +93,7 @@ final router = GoRouter(
         ),
         GoRoute(
           path: '/setting',
-          builder: (context, state) => const SettingScreen(),
+          builder: (context, state) =>  SettingScreen(),
         ),
       ],
     ),
