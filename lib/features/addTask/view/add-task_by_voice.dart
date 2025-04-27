@@ -23,20 +23,32 @@ class _AddTaskThroughVoiceState extends State<AddTaskThroughVoice> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Spacer(),
-                CircleAvatar(
-                  radius: 125,
-                  backgroundColor: Colors.grey.shade300,
-                  child: IconButton(
-                    icon: Icon(
-                      isRecording
-                          ? Icons.stop_circle_outlined
-                          : Icons.mic_none_outlined,
-                      size: 120,
-                      color: AppColors.backgroundDark,
+                Container(
+                  decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(125),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 8,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+                  child: CircleAvatar(
+                    radius: 125,
+                    backgroundColor: Colors.grey.shade300,
+                    child: IconButton(
+                      icon: Icon(
+                        isRecording
+                            ? Icons.stop_circle_outlined
+                            : Icons.mic_none_outlined,
+                        size: 120,
+                        color: AppColors.backgroundDark,
+                      ),
+                      onPressed: () {
+                        // TODO: Implement Voice Record Start/Stop functionality
+                      },
                     ),
-                    onPressed: () {
-                      // TODO: Implement Voice Record Start/Stop functionality
-                    },
                   ),
                 ),
                 Spacer(),
