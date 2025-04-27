@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:marham_softec/features/Auth/model/controller/auth_controller.dart';
+import 'package:provider/provider.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<AuthController>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Settings"),
@@ -15,46 +18,47 @@ class SettingScreen extends StatelessWidget {
         children: [
           // Theme Change
           ListTile(
-            leading: Icon(Icons.brightness_6),  // Icon for theme change
+            leading: Icon(Icons.brightness_6), // Icon for theme change
             title: Text("Theme Change"),
             onTap: () {
-            context.push('/themeChange');
+              context.push('/themeChange');
             },
           ),
-          
+
           // Privacy Policy
           ListTile(
-            leading: Icon(Icons.lock),  // Icon for privacy policy
+            leading: Icon(Icons.lock), // Icon for privacy policy
             title: Text("Privacy Policy"),
             onTap: () {
-             context.push('/privacyPolicy');
+              context.push('/privacyPolicy');
             },
           ),
-          
+
           // Terms & Conditions
           ListTile(
-            leading: Icon(Icons.description),  // Icon for terms & conditions
+            leading: Icon(Icons.description), // Icon for terms & conditions
             title: Text("Terms & Conditions"),
             onTap: () {
               context.push('/termsScreen');
             },
           ),
-          
+
           // About App
           ListTile(
-            leading: Icon(Icons.info),  // Icon for about app
+            leading: Icon(Icons.info), // Icon for about app
             title: Text("About App"),
             onTap: () {
-             context.push('/about');
+              context.push('/about');
             },
           ),
-          
+
           // Log Out
           ListTile(
-            leading: Icon(Icons.exit_to_app),  // Icon for log out
+            leading: Icon(Icons.exit_to_app), // Icon for log out
             title: Text("Log Out"),
             onTap: () {
-              // Handle log out
+              controller.logout();
+              context.go('/');
             },
           ),
         ],
@@ -62,4 +66,3 @@ class SettingScreen extends StatelessWidget {
     );
   }
 }
-
