@@ -98,4 +98,9 @@ class AuthController with ChangeNotifier {
     signUpObscurePassword = !signUpObscurePassword;
     notifyListeners();
   }
+
+  void logout() {
+    LocalStorageService.remove('access_token');
+    notifyListeners();
+  }
 }
