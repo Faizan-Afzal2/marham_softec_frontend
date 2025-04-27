@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:marham_softec/core/theme/app_colors.dart';
 import 'package:marham_softec/core/theme/app_fonts.dart';
@@ -173,120 +174,125 @@ class _PlannerScreenState extends State<PlannerScreen> {
       itemCount: _tasks.length,
       itemBuilder: (context, index) {
         final task = _tasks[index];
-        return _buildTaskItem(task, 0);
+        return _buildTaskItem(task, 0,index);
       },
     );
   }
 
-  Widget _buildTaskItem(Map<String, dynamic> task, int indentLevel) {
+  Widget _buildTaskItem(Map<String, dynamic> task, int indentLevel,int index) {
     final dueDate = DateTime.parse(task['dueDate']);
-    return Padding(
-      padding: EdgeInsets.only(left: indentLevel * 20.0),
-      child: Card(
-        color: AppColors.backgroundLight,
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        elevation: 8,
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Stack(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              task['title'],
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              task['description'],
-                              style: TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.access_time,
-                                  size: 14,
-                                  color: Colors.blueGrey[300],
+    return GestureDetector(
+       onTap: () {
+          context.push('/taskDetail', extra: _tasks[index]);
+        },
+      child: Padding(
+        padding: EdgeInsets.only(left: indentLevel * 20.0),
+        child: Card(
+          color: AppColors.backgroundLight,
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          elevation: 8,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Stack(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                task['title'],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
                                 ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  DateFormat('hh:mm a').format(dueDate),
-                                  style: TextStyle(
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                task['description'],
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.access_time,
+                                    size: 14,
                                     color: Colors.blueGrey[300],
-                                    fontSize: 12,
                                   ),
-                                ),
-                                const Spacer(),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: _getCategoryColor(task['category'])
-                                        .withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(4),
-                                    border: Border.all(
-                                        color:
-                                            _getCategoryColor(task['category']),
-                                        width: 1),
-                                  ),
-                                  child: Text(
-                                    task['category'],
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    DateFormat('hh:mm a').format(dueDate),
                                     style: TextStyle(
-                                      color:
-                                          _getCategoryColor(task['category']),
+                                      color: Colors.blueGrey[300],
                                       fontSize: 12,
-                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  const Spacer(),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: _getCategoryColor(task['category'])
+                                          .withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(4),
+                                      border: Border.all(
+                                          color:
+                                              _getCategoryColor(task['category']),
+                                          width: 1),
+                                    ),
+                                    child: Text(
+                                      task['category'],
+                                      style: TextStyle(
+                                        color:
+                                            _getCategoryColor(task['category']),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Positioned(
-                right: 0,
-                top: 0,
-                child: IconButton(
-                  icon: Icon(
-                    task['completed']
-                        ? Icons.check_circle
-                        : Icons.check_circle_outline,
-                    color:
-                        task['completed'] ? AppColors.customGreen : Colors.grey,
-                    size: 24,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      task['completed'] = !task['completed'];
-                    });
-                  },
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  constraints: const BoxConstraints(),
-                  padding: EdgeInsets.zero,
-                  tooltip:
-                      task['completed'] ? 'Mark as not done' : 'Mark as done',
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: IconButton(
+                    icon: Icon(
+                      task['completed']
+                          ? Icons.check_circle
+                          : Icons.check_circle_outline,
+                      color:
+                          task['completed'] ? AppColors.customGreen : Colors.grey,
+                      size: 24,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        task['completed'] = !task['completed'];
+                      });
+                    },
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    constraints: const BoxConstraints(),
+                    padding: EdgeInsets.zero,
+                    tooltip:
+                        task['completed'] ? 'Mark as not done' : 'Mark as done',
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

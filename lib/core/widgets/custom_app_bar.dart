@@ -5,27 +5,30 @@ import 'package:marham_softec/core/theme/app_colors.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showBackButton;
+  final Color? customColor;
 
   const CustomAppBar({
     Key? key,
     required this.title,
-    this.showBackButton = true, // Default show back button
+    this.showBackButton = true,
+    this.customColor, // Default show back button
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea( // To avoid notch areas
+    return SafeArea(
+      // To avoid notch areas
       child: Container(
         height: kToolbarHeight + 10, // Same as default AppBar height
         decoration: BoxDecoration(
-          color: AppColors.backgroundLight,
-          
+          color: customColor ?? AppColors.backgroundLight,
         ),
         child: Row(
           children: [
             if (showBackButton)
               IconButton(
-                icon: Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.backgroundDark),
+                icon: Icon(Icons.arrow_back_ios_new_rounded,
+                    color: AppColors.backgroundDark),
                 onPressed: () {
                   context.pop();
                 },
