@@ -13,8 +13,9 @@ class AddTaskByTextController with ChangeNotifier {
   TextEditingController taskNameController = TextEditingController();
   TextEditingController taskDescriptionController = TextEditingController();
   TextEditingController taskCategoryController = TextEditingController();
-  TextEditingController dueDateController = TextEditingController(); // Added controller
-  
+  TextEditingController dueDateController =
+      TextEditingController(); // Added controller
+
   String? selectedCategory;
 
   List<Datum> categories = [];
@@ -88,18 +89,33 @@ class AddTaskByTextController with ChangeNotifier {
     }
   }
 
-  @override
-  void dispose() {
-    taskNameController.dispose();
-    taskDescriptionController.dispose();
-    taskCategoryController.dispose();
-    dueDateController.dispose(); // Clean up controller
-    super.dispose();
-  }
-
-  void logout() {
-    LocalStorageService.remove('access_token');
-    notifyListeners();
+  void createTaskWithAI(
+      {required BuildContext context, required String text}) async {
+    final response = await _createtaskService.createTaskWIthAI(text: text);
+    print(response);
+    if (response['success']) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          CustomSnackbar(
+            title: "Success",
+            message: "Account created successfully",
+            icon: Icons.check_circle,
+            backgroundColor: Colors.green,
+          ),
+        );
+    } else {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          CustomSnackbar(
+            title: "Error",
+            message: "Error while creating task",
+            icon: Icons.error,
+            backgroundColor: Colors.red,
+          ),
+        );
+    }
   }
 }
 
@@ -107,11 +123,9 @@ void showQuickAddDialog(BuildContext context) {
   TextEditingController taskTextController = TextEditingController();
 
   showDialog(
-    
     context: context,
     builder: (context) => AlertDialog(
       backgroundColor: Colors.grey.shade100,
-      
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -124,23 +138,22 @@ void showQuickAddDialog(BuildContext context) {
       ),
       content: SizedBox(
         height: 200, // Set fixed height
-        width: MediaQuery.of(context).size.width * 0.9, 
+        width: MediaQuery.of(context).size.width * 0.9,
         child: TextField(
-  controller: taskTextController,
-  maxLines: null, // Let it grow
-  expands: true, // Fill all available space
-  textAlignVertical: TextAlignVertical.top, // <-- Top alignment
-  textAlign: TextAlign.start, // <-- Left alignment
-  decoration: InputDecoration(
-    hintText: 'Enter task details...',
-    filled: true,
-    fillColor: Colors.white,
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(15),
-    ),
-  ),
-),
-
+          controller: taskTextController,
+          maxLines: null, // Let it grow
+          expands: true, // Fill all available space
+          textAlignVertical: TextAlignVertical.top, // <-- Top alignment
+          textAlign: TextAlign.start, // <-- Left alignment
+          decoration: InputDecoration(
+            hintText: 'Enter task details...',
+            filled: true,
+            fillColor: Colors.white,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+        ),
       ),
       actionsPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       actions: [
@@ -148,7 +161,8 @@ void showQuickAddDialog(BuildContext context) {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Cancel', style: TextStyle(color: AppColors.backgroundDark)),
+          child:
+              Text('Cancel', style: TextStyle(color: AppColors.backgroundDark)),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -164,7 +178,10 @@ void showQuickAddDialog(BuildContext context) {
             }
             Navigator.of(context).pop();
           },
-          child: Text('Add Task',style: TextStyle(color: AppColors.backgroundLight),),
+          child: Text(
+            'Add Task',
+            style: TextStyle(color: AppColors.backgroundLight),
+          ),
         ),
       ],
     ),
