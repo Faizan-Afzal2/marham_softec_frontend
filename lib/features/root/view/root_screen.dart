@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:marham_softec/core/theme/app_colors.dart';
+import 'package:marham_softec/features/addTask/view/controllers/add_task_by_text_controller.dart';
+import 'package:marham_softec/features/root/controller/root_screen_controller.dart';
 import 'package:marham_softec/features/root/widgets/add_task_dialog.dart';
+import 'package:provider/provider.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 class RootScreen extends StatefulWidget {
@@ -23,11 +26,28 @@ class _RootScreenState extends State<RootScreen> {
     '/progress',
     '/setting',
   ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final controller =
+          Provider.of<RootScreenController>(context, listen: false);
+      controller.fetchMe();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<RootScreenController>(context);
+
     return Scaffold(
-      body: widget.child, // Show the current screen (Home, Mood, etc.)
+      body: Container(
+        color: Colors.black,
+        child: controller.isLoading
+            ? Center(child: CircularProgressIndicator(color: Colors.white))
+            : widget.child,
+      ),
       bottomNavigationBar: StylishBottomBar(
         currentIndex: _selectedIndex,
         elevation: 10,

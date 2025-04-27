@@ -1,27 +1,24 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:marham_softec/models/user_model.dart';
+import 'package:marham_softec/services/local_storage_service.dart';
 import '../core/utils/api_result.dart';
 import '../core/utils/app_exception.dart';
 
 class UserService {
-  final String baseUrl = 'https://jsonplaceholder.typicode.com';
+  final String baseUrl = 'http://192.168.0.188:3000/';
 
-  Future<ApiResult<List<UserModel>>> fetchUsers(
-      {int start = 0, int limit = 10}) async {
-    try {
-      final response = await http
-          .get(Uri.parse('$baseUrl/users?_start=$start&_limit=$limit'));
+  Future fetchMe() async {
+    final token = LocalStorageService.getString('access_token');
 
-      if (response.statusCode == 200) {
-        final List jsonData = json.decode(response.body);
-        final users = jsonData.map((e) => UserModel.fromJson(e)).toList();
-        return ApiResult.success(users);
-      } else {
-        return ApiResult.failure(AppException.serverError());
-      }
-    } catch (e) {
-      return ApiResult.failure(AppException.networkError());
-    }
+    final response = await http.get(
+      Uri.parse('$baseUrl/auth/me'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    final jsonData = json.decode(response.body);
+    return jsonData;
   }
 }
