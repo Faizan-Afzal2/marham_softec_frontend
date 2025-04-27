@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marham_softec/features/Auth/model/controller/auth_controller.dart';
+import 'package:marham_softec/features/addTask/view/controllers/add_task_by_text_controller.dart';
 import 'package:marham_softec/services/local_storage_service.dart';
 import 'package:provider/provider.dart';
 import 'core/theme/theme.dart';
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => AuthController()),
+        ChangeNotifierProvider(
+            create: (_) => AddTaskByTextController()..loadCategories()),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) {
