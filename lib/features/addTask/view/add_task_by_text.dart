@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:marham_softec/core/theme/app_colors.dart';
 import 'package:marham_softec/core/widgets/app_textfeild.dart';
 import 'package:marham_softec/core/widgets/border_button.dart';
 import 'package:marham_softec/core/widgets/custom_app_bar.dart';
 import 'package:marham_softec/core/widgets/primary_button.dart';
 import 'package:marham_softec/features/addTask/view/controllers/add_task_by_text_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class AddTaskThroughText extends StatefulWidget {
   const AddTaskThroughText({super.key});
@@ -15,22 +17,7 @@ class AddTaskThroughText extends StatefulWidget {
 }
 
 class _AddTaskThroughTextState extends State<AddTaskThroughText> {
-  DateTime dueDate = DateTime.now();
-  // final List<String> categories = ['Work', 'Personal', 'Study', 'Other'];
 
-  Future<void> _pickDueDate() async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: dueDate,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
-    );
-    if (picked != null && picked != dueDate) {
-      setState(() {
-        dueDate = picked;
-      });
-    }
-  }
 
   @override
   void initState() {
@@ -63,6 +50,22 @@ class _AddTaskThroughTextState extends State<AddTaskThroughText> {
               hintText: 'Task Description',
             ),
             const SizedBox(height: 16),
+            AppTextField(
+  controller: controller.dueDateController,
+  hintText: 'Select Due Date',
+  // readOnly: true,
+  // onTap: () => controller.pickDueDate(context),
+  suffixIcon: IconButton(
+    icon: Icon(
+      Icons.calendar_month,
+      color: AppColors.backgroundDark,
+    ),
+    onPressed: () => controller.pickDueDate(context),
+  ),
+),
+ SizedBox(height: 16),
+
+             SizedBox(height: 16),
             // Category Chips
             Align(
               alignment: Alignment.centerLeft,
@@ -72,59 +75,54 @@ class _AddTaskThroughTextState extends State<AddTaskThroughText> {
                     style: TextStyle(color: Colors.grey.shade600)),
               ),
             ),
-            Wrap(
-              spacing: 8,
-              children: controller.categories.map((category) {
-                final isSelected = category.name == controller.selectedCategory;
-                return ChoiceChip(
-                  label: Text(category.name),
-                  selected: isSelected,
-                  onSelected: (selected) {
-                    setState(() {
-                      controller.selectedCategory =
-                          selected ? category.name : null;
-                      controller.taskCategoryController.text =
-                          controller.selectedCategory ?? '';
-                    });
-                  },
-                  backgroundColor: Colors.white,
-                  selectedColor: Colors.black,
-                  labelStyle: TextStyle(
-                    color: isSelected ? Colors.white : Colors.black,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                );
-              }).toList(),
-            ),
-            const SizedBox(height: 16),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                    'Selected Date: ${dueDate.toLocal().toString().split(' ')[0]}'),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: BorderButton(
-                      text: 'Pick a Date', onPressed: _pickDueDate),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
+            SingleChildScrollView(
+  scrollDirection: Axis.horizontal,
+  child: Row(
+    children: controller.categories.map((category) {
+      final isSelected = category.name == controller.selectedCategory;
+      return Padding(
+        padding: const EdgeInsets.only(right: 8.0), // spacing between chips
+        child: ChoiceChip(
+          label: Text(category.name),
+          selected: isSelected,
+          onSelected: (selected) {
+            setState(() {
+              controller.selectedCategory = selected ? category.name : null;
+              controller.taskCategoryController.text =
+                  controller.selectedCategory ?? '';
+            });
+          },
+          backgroundColor: Colors.white,
+          selectedColor: Colors.black,
+          labelStyle: TextStyle(
+            color: isSelected ? Colors.white : Colors.black,
+          ),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.black),
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+      );
+    }).toList(),
+  ),
+),
+
+            
+           Spacer(),
+           BorderButton(text: 'Quick Add with AI', onPressed: ()=>showQuickAddDialog(context)),
+           SizedBox(height: 30,),
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.only(bottom: 30.0),
               child: PrimaryButton(
-                  text: 'Submit Task',
-                  onPressed: () {
-                    controller.createTask(context);
-                    context.pop();
-                    // controller.logout();
-                    // context.push("/");
-                  }),
+                    text: 'Submit Task',
+                    onPressed: () {
+                      controller.createTask(context);
+                      context.pop();
+                      // controller.logout();
+                      // context.push("/");
+                    }),
             ),
+            
           ],
         ),
       ),
