@@ -8,6 +8,8 @@ import 'package:marham_softec/features/home/widget/horizontal_bar.dart';
 import 'package:marham_softec/features/home/widget/mood_card.dart';
 import 'package:marham_softec/features/home/widget/progress_bar.dart';
 import 'package:marham_softec/features/home/widget/task_list_widget.dart';
+import 'package:marham_softec/features/root/controller/root_screen_controller.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const List<Map<String, dynamic>> tasks = [
@@ -46,6 +48,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<RootScreenController>(context);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -67,39 +70,39 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.grey[800],
                           ),
                         ),
-                        SizedBox(
-                            height:
-                                4), // Small space between Hello and Username
-                        Text('Abd', style: AppFonts.heading),
+                        SizedBox(height: 4),
+                        controller.user != null
+                            ? Text(controller.user!.name,
+                                style: AppFonts.heading)
+                            : Container()
                       ],
                     ),
                     Stack(
-        children: [
-          IconButton(
-            onPressed: () {
-              // Handle notification icon tap
-            },
-            icon: Icon(
-              Icons.notifications_none,
-              size: 28,
-            ),
-          ),
-          if (HomeScreen.hasNotification)
-            Positioned(
-              right: 8,
-              top: 8,
-              child: Container(
-                width: 10,
-                height: 10,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
-        ],
-      ),
-
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            // Handle notification icon tap
+                          },
+                          icon: Icon(
+                            Icons.notifications_none,
+                            size: 28,
+                          ),
+                        ),
+                        if (HomeScreen.hasNotification)
+                          Positioned(
+                            right: 8,
+                            top: 8,
+                            child: Container(
+                              width: 10,
+                              height: 10,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
                   ],
                 ),
                 SizedBox(
