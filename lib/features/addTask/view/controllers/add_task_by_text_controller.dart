@@ -72,8 +72,32 @@ class AddTaskByTextController with ChangeNotifier {
     }
   }
 
-  void logout() {
-    LocalStorageService.remove('access_token');
-    notifyListeners();
+  void createTaskWithAI(
+      {required BuildContext context, required String text}) async {
+    final response = await _createtaskService.createTaskWIthAI(text: text);
+    print(response);
+    if (response['success']) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          CustomSnackbar(
+            title: "Success",
+            message: "Account created successfully",
+            icon: Icons.check_circle,
+            backgroundColor: Colors.green,
+          ),
+        );
+    } else {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          CustomSnackbar(
+            title: "Error",
+            message: "Error while creating task",
+            icon: Icons.error,
+            backgroundColor: Colors.red,
+          ),
+        );
+    }
   }
 }

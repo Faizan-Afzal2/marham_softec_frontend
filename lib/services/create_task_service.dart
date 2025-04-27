@@ -33,4 +33,19 @@ class CreateTaskervice {
 
     return response.body;
   }
+
+  Future createTaskWIthAI({required String text}) async {
+    final token = LocalStorageService.getString('access_token');
+    final response = await http.post(
+      Uri.parse('http://192.168.0.188:3000/create-raw'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+      body: {
+        "text": text,
+      },
+    );
+
+    return json.decode(response.body);
+  }
 }

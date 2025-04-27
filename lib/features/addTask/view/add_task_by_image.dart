@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:marham_softec/core/widgets/border_button.dart';
 import 'package:marham_softec/core/widgets/custom_app_bar.dart';
 import 'package:marham_softec/core/widgets/primary_button.dart';
+import 'package:marham_softec/features/addTask/view/controllers/add_task_by_text_controller.dart';
+import 'package:provider/provider.dart';
 
 class AddTaskThroughImage extends StatefulWidget {
   const AddTaskThroughImage({super.key});
@@ -34,11 +36,14 @@ class _AddTaskThroughImageState extends State<AddTaskThroughImage> {
     try {
       final inputImage = InputImage.fromFile(File(pickedImage!.path));
       final recognizedText = await textRecognizer.processImage(inputImage);
-      print('Extracted text: ${recognizedText.text}');
+      // print('Extracted text: ${recognizedText.text}');
 
       setState(() {
         extractedText = recognizedText.text;
       });
+      final controller =
+          Provider.of<AddTaskByTextController>(context, listen: false);
+      controller.createTaskWithAI(context: context, text: extractedText);
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
