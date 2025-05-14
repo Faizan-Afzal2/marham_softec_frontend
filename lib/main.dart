@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marham_softec/features/Auth/model/controller/auth_controller.dart';
+import 'package:marham_softec/features/Auth/controller/auth_controller.dart';
 import 'package:marham_softec/features/addTask/view/controllers/add_task_by_text_controller.dart';
 import 'package:marham_softec/features/root/controller/root_screen_controller.dart';
 import 'package:marham_softec/services/local_storage_service.dart';

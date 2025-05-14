@@ -5,7 +5,7 @@ import '../core/utils/api_result.dart';
 import '../core/utils/app_exception.dart';
 
 class UserService {
-  final String baseUrl = 'http://192.168.0.188:3000/';
+  final String baseUrl = 'http://localhost:3000/';
 
   Future fetchMe() async {
     final token = LocalStorageService.getString('access_token');

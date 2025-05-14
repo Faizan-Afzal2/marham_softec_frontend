@@ -1,94 +1,72 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
-
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
+# Flutter & Dart
 .dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
-
-# Symbolication related
-app.*.symbols
-
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-
-# Flutter/Dart/Pub related
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
 .packages
 .pub-cache/
-.pub/
-
-# Build output
 build/
+.melos_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
 
-# Web build
-web/build/
+# Generated files
+generated_plugin_registrant.dart
 
-# iOS specific
+# iOS
 ios/Flutter/Flutter.framework
 ios/Flutter/Flutter.podspec
 ios/Flutter/Generated.xcconfig
-ios/ServiceDefinitions.json
-ios/Runner/GeneratedPluginRegistrant.*
+ios/Flutter/App.framework
+ios/Flutter/engine/
+ios/Pods/
+ios/.symlinks/
+*.xcworkspace
+*.xcuserdata
+DerivedData/
+*.hmap
+*.ipa
+*.app.dSYM.zip
+*.app.dSYM
+*.xcodeproj/
 
-# Android specific
-.android/
-app/*.iml
+# Android
+android/.gradle/
+android/app/build/
+android/local.properties
+android/.idea/
+*.apk
+*.jks
 
-# VS Code settings
+# macOS
+macos/Pods/
+macos/Flutter/ephemeral/
+macos/Flutter/GeneratedPluginRegistrant.swift
+
+# Windows
+windows/Flutter/ephemeral/
+
+# Linux
+linux/Flutter/ephemeral/
+
+# Web
+web/.dart_tool/
+web/build/
+
+# IDEs and editors
 .vscode/
-
-# IntelliJ related
-*.iml
 .idea/
+*.iml
 *.ipr
 *.iws
 
-# MacOS
-macos/Flutter/GeneratedPluginRegistrant.swift
-macos/Flutter/ephemeral/
-
-# Windows
-windows/Flutter/generated_plugin_registrant.cc
-windows/Flutter/generated_plugin_registrant.h
-windows/flutter/ephemeral/
-
-# Linux
-linux/flutter/ephemeral/
-
 # Others
 *.log
+*.tmp
+*.lock
+
+# Env & Secrets
+.env
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Package-lock (for apps only)
+# For packages/libraries, you may ignore this
+# pubspec.lock

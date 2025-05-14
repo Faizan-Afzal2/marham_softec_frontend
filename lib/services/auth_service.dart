@@ -1,39 +1,34 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import '../core/config/app_config.dart';
+import '../core/services/base_api_service.dart';
 
-class AuthService {
-  Future signUp({
+class AuthService extends BaseApiService {
+  final AppConfig _config = AppConfig();
+
+  Future<dynamic> signUp({
     required String email,
     required String password,
     required String name,
   }) async {
-    final response = await http.post(
-      Uri.parse('http://192.168.0.188:3000/auth/register'),
+    return post(
+      _config.registerEndpoint,
       body: {
         'email': email,
         'password': password,
         'name': name,
       },
     );
-
-    return json.decode(response.body);
   }
 
-  Future logIn({
+  Future<dynamic> logIn({
     required String email,
     required String password,
   }) async {
-    final response = await http.post(
-      Uri.parse('http://192.168.0.188:3000/auth/login'),
+    return post(
+      _config.loginEndpoint,
       body: {
         'email': email,
         'password': password,
       },
     );
-
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
-    return json.decode(response.body);
   }
 }

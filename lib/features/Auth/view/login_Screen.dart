@@ -5,7 +5,7 @@ import 'package:marham_softec/core/theme/app_fonts.dart';
 import 'package:marham_softec/core/widgets/app_textfeild.dart';
 import 'package:marham_softec/core/widgets/border_button.dart';
 import 'package:marham_softec/core/widgets/primary_button.dart';
-import 'package:marham_softec/features/Auth/model/controller/auth_controller.dart';
+import 'package:marham_softec/features/Auth/controller/auth_controller.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {

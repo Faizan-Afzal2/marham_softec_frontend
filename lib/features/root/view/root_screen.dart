@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:marham_softec/core/theme/app_colors.dart';
-import 'package:marham_softec/features/addTask/view/controllers/add_task_by_text_controller.dart';
 import 'package:marham_softec/features/root/controller/root_screen_controller.dart';
 import 'package:marham_softec/features/root/widgets/add_task_dialog.dart';
 import 'package:provider/provider.dart';

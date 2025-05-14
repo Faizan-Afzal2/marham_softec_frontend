@@ -11,7 +11,7 @@ class CreateTaskervice {
       String? categoryName}) async {
     final token = LocalStorageService.getString('access_token');
     final response = await http.post(
-      Uri.parse('http://192.168.0.188:3000/task/add'),
+      Uri.parse('http://localhost:3000/task/add'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -28,7 +28,7 @@ class CreateTaskervice {
 
   Future getCategories() async {
     final response = await http.get(
-      Uri.parse('http://192.168.0.188:3000/category/get-all'),
+      Uri.parse('http://localhost:3000/category/get-all'),
     );
 
     return response.body;
@@ -37,7 +37,7 @@ class CreateTaskervice {
   Future createTaskWIthAI({required String text}) async {
     final token = LocalStorageService.getString('access_token');
     final response = await http.post(
-      Uri.parse('http://192.168.0.188:3000/create-raw'),
+      Uri.parse('http://localhost:3000/create-raw'),
       headers: {
         'Authorization': 'Bearer $token',
       },

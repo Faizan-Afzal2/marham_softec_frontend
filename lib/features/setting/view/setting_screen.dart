@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:marham_softec/features/Auth/model/controller/auth_controller.dart';
+import 'package:marham_softec/features/Auth/controller/auth_controller.dart';
 import 'package:provider/provider.dart';
 
 class SettingScreen extends StatelessWidget {
